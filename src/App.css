@@ -1,0 +1,74 @@
+.appWrapper {
+  display: flex;
+  padding: 50px;
+  justify-content: space-between;
+  max-width: 1100px;
+}
+
+.folderWrapper,
+.file {
+  animation: show 0.3s;
+}
+
+.folderContent {
+  display: flex; 
+  flex-direction: column; 
+  align-items: flex-start;
+  margin-left: 20px;
+}
+
+.nodeItemWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.treeNodeIcon {
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.treeNodeName {
+  cursor: pointer;
+}
+
+.treeNodeName:hover {
+  color: #fff;
+}
+
+.file {
+  font-size: 14px;
+  color: #d9aaaa;
+  cursor: pointer;
+}
+
+.file:hover {
+  color: #fff;
+}
+
+.inputSearchWrapper {
+  display: flex;
+  flex-direction: row;
+  max-height: 23px;
+}
+
+.searchIcon {
+  margin-left: -22px;
+  margin-top: 2px;
+  width: 17px;
+  height: 17px;
+  pointer-events: none;
+}
+
+@keyframes show {
+  0% {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
