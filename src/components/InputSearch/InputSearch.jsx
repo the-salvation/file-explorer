@@ -1,17 +1,17 @@
 import { Component } from "react";
 import { arrayOf, object, func } from "prop-types";
-import { DATA_TYPES } from "../../utils/constants/constants";
+import { DATA_TYPES, DEBOUNCE_TIMEOUT } from "../../utils/constants/constants";
 import { debounce, getPathSegments } from "../../utils/helpers/helpers";
-import magnifyingGlass from '../../assets/icons/magnifying_glass.svg';
 
 class InputSearch extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchTerm: ''
+      searchTerm: '',
+      errorClass: ''
     };
 
-    this.debouncedSearch = debounce(this.handleSearch, 400);
+    this.debouncedSearch = debounce(this.handleSearch, DEBOUNCE_TIMEOUT);
   }
 
   searchFiles = (fileStructure, searchTerm) => {
@@ -79,6 +79,8 @@ class InputSearch extends Component {
       leafFolder.push({ name, mime, type });
     });
 
+    this.setState({ errorClass: newStructure.length === 0 ? 'error' : '' });
+
     return { newStructure, uniquePaths: [...foundFolders] };
   };
 
@@ -96,16 +98,14 @@ class InputSearch extends Component {
 
   render() {
     return (
-      <div className="inputSearchWrapper">
+      <div className={`inputSearchWrapper ${this.state.errorClass}`}>
         <input
+          className="inputSearch"
           type="text"
           placeholder="Search for a file..."
           value={this.state.searchTerm}
           onChange={this.handleInputChange}
         />
-        <span className="searchIcon">
-          <img src={magnifyingGlass} alt="magnifying glass" />
-        </span>
       </div>
     );
   }

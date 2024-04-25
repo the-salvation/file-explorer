@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { Component } from 'react';
 import jsonData from './assets/data.json';
 import TreeNode from './components/TreeNode/TreeNode';
@@ -14,6 +13,7 @@ class App extends Component {
       searchResults: [],
       uniquePaths: [],
       foldersToExpand: [],
+      error: null,
     };
   }
 
@@ -43,22 +43,22 @@ class App extends Component {
     }
 
     return (
-        <div className='appWrapper'>
-          <div>
-            {nodesToRender?.map((item, index) => (
-              <TreeNode
-                key={index + item.name}
-                data={item}
-                fullPathName={`/${item.name}`}
-                expandedFolders={foldersToExpand}
-              />
-            ))}
-          </div>
-          <InputSearch
-            fileStructure={fileStructure}
-            onSearchResults={this.handleSearchResults}
-          />
+      <div className='appWrapper'>
+        <InputSearch
+          fileStructure={fileStructure}
+          onSearchResults={this.handleSearchResults}
+        />
+        <div>
+          {nodesToRender?.map((item, index) => (
+            <TreeNode
+              key={index + item.name}
+              data={item}
+              fullPathName={`/${item.name}`}
+              expandedFolders={foldersToExpand}
+            />
+          ))}
         </div>
+      </div>
     );
   }
 }
